@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        #taskList { list-style-type: none; padding: 0; }
+        #taskList li { margin: 5px 0; }
+        .remove { color: red; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h1>To-Do List</h1>
+    <input type="text" id="taskInput" placeholder="Add a new task">
+    <button id="addTaskBtn">Add Task</button>
+
+    <ul id="taskList"></ul>
+
+    <script>
+        const taskInput = document.getElementById('taskInput');
+        const addTaskBtn = document.getElementById('addTaskBtn');
+        const taskList = document.getElementById('taskList');
+
+        addTaskBtn.addEventListener('click', function() {
+            const taskText = taskInput.value.trim();
+
+            if (taskText) {
+                const listItem = document.createElement('li');
+                listItem.textContent = taskText;
+
+                const removeBtn = document.createElement('span');
+                removeBtn.textContent = ' [Remove]';
+                removeBtn.className = 'remove';
+                removeBtn.onclick = function() {
+                    taskList.removeChild(listItem);
+                };
+
+                listItem.appendChild(removeBtn);
+                taskList.appendChild(listItem);
+                taskInput.value = ''; // Clear input field
+            }
+        });
+    </script>
+
+</body>
+</html>
